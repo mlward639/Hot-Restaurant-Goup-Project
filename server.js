@@ -32,4 +32,4 @@ const waitList = [];
 
 //res.sendFile(path.join(__dirname,'home.html')));
 
-app.listen(PORT, () => console.log(`App listening on port ${PORT}`));g
+app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
