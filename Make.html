@@ -82,7 +82,37 @@
   <script>
       const form = document.getElementById('res-form');
 
-      form.addEventListener('submit', function(event) {} )
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+      var newReservation = {
+        name: $("#reserve-name").val().trim(),
+        phone: $("#reserve-phone").val().trim(),
+        email: $("#reserve-email").val().trim(),
+        uID: $("#reserve-unique-id").val().trim()
+       };
+
+       fetch('/api/reservations', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(newReservation),
+       })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(`adding reservation for ${data.name}`)
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+        document.getElementById('reserve-name').value = '';
+        document.getElementById('reserve-phone').value = '';
+        document.getElementById('reserve-email').value = '';
+        document.getElementById('reserve-unique-id').value = '';
+
+      });
 
   </script>
 
