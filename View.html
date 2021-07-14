@@ -66,6 +66,39 @@
 
   </div>
 
+  <script type="text/javascript">
+    const tablelist = document.getElementById('tablelist');
+    const waitlist = document.getElementById('waitlist');
+
+    fetch(`/api/reservations`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        data.forEach(element => {
+          tablelist.appendChild(`<p>${element}</p>`)
+        });
+      })
+    
+      fetch(`/api/waitList`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        data.forEach(element => {
+          waitlist.appendChild(`<p>${element}</p>`)
+        });
+      })
+    </script>
+
 </body>
 
 </html>
