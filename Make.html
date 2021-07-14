@@ -86,10 +86,10 @@
         event.preventDefault();
 
       var newReservation = {
-        name: $("#reserve-name").val().trim(),
-        phone: $("#reserve-phone").val().trim(),
-        email: $("#reserve-email").val().trim(),
-        uID: $("#reserve-unique-id").val().trim()
+        name: document.getElementById("reserve-name").value.trim(),
+        phone: document.getElementById("reserve-phone").value.trim(),
+        email: document.getElementById("reserve-email").value.trim(),
+        uID: document.getElementById("reserve-unique-id").value.trim()
        };
 
        fetch('/api/reservations', {
