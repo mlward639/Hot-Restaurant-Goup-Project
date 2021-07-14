@@ -9,7 +9,6 @@
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
@@ -44,7 +43,7 @@
             Table Reservation
           </div>
           <div class="card-body">
-            <form role="form">
+            <form id="res-form" role="form">
               <div class="form-group">
                 <label for="reserve-name">Name</label>
                 <input type="text" class="form-control" id="reserve-name">
@@ -80,5 +79,41 @@
   </div>
 
 </body>
+  <script>
+      const form = document.getElementById('res-form');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+      var newReservation = {
+        name: $("#reserve-name").val().trim(),
+        phone: $("#reserve-phone").val().trim(),
+        email: $("#reserve-email").val().trim(),
+        uID: $("#reserve-unique-id").val().trim()
+       };
+
+       fetch('/api/reservations', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify(newReservation),
+       })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(`adding reservation for ${data.name}`)
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+        document.getElementById('reserve-name').value = '';
+        document.getElementById('reserve-phone').value = '';
+        document.getElementById('reserve-email').value = '';
+        document.getElementById('reserve-unique-id').value = '';
+
+      });
+
+  </script>
 
 </html>
